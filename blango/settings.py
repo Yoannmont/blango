@@ -46,7 +46,6 @@ class Dev(Configuration):
     CRISPY_TEMPLATE_PACK = "bootstrap5"
 
     # Logging
-
     LOGGING = {
         "version": 1,
         "disable_existing_loggers": False,
@@ -95,6 +94,9 @@ class Dev(Configuration):
 
     # Authentication
     AUTH_USER_MODEL = "blango_auth.User"
+    ACCOUNT_ACTIVATION_DAYS = 7
+
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
     # Application definition
 
@@ -108,8 +110,9 @@ class Dev(Configuration):
         'blog',
         'crispy_forms',
         'crispy_bootstrap5',
-        'debug_toolbar',
         'blango_auth',
+        'debug_toolbar',
+        
     ]
 
     MIDDLEWARE = [
