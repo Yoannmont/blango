@@ -24,6 +24,7 @@ import blango_auth.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
+    
     path(
         "accounts/register/",
         RegistrationView.as_view(form_class=BlangoRegistrationForm),
@@ -31,7 +32,7 @@ urlpatterns = [
     ),
     path('accounts/', include('django_registration.backends.activation.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    
+    path("accounts/", include("allauth.urls")),
     path('accounts/profile/', blango_auth.views.profile, name="profile"),
     
 ]
