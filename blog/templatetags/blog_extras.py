@@ -33,8 +33,6 @@ def author_details(author, current_user):
     if not isinstance(author, user_model):
         # return empty string as safe default
         return ""
-    
-    print(author, current_user)
 
     if author == current_user:
         return format_html("<strong>Me</strong>")
