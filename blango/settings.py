@@ -93,6 +93,9 @@ class Dev(Configuration):
     # Django Debug Toolbar
     INTERNAL_IPS = ["192.168.10.93"]
 
+    # Authentication
+    AUTH_USER_MODEL = "blango_auth.User"
+
     # Application definition
 
     INSTALLED_APPS = [
@@ -106,6 +109,7 @@ class Dev(Configuration):
         'crispy_forms',
         'crispy_bootstrap5',
         'debug_toolbar',
+        'blango_auth',
     ]
 
     MIDDLEWARE = [
