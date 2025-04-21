@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 from configurations import values, Configuration
 import dj_database_url
+from debug_toolbar.panels.logging import collector
 
 class Dev(Configuration):
 
@@ -25,6 +26,8 @@ class Dev(Configuration):
 
     # SECURITY WARNING: keep the secret key used in production secret!
     SECRET_KEY = 'django-insecure-+sn%dpa!086+g+%44z9*^j^q-u4n!j(#wl)x9a%_1op@zz2+1-'
+
+
 
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = values.BooleanValue(True)
@@ -69,6 +72,11 @@ class Dev(Configuration):
                 "class": "django.utils.log.AdminEmailHandler",
                 "filters": ["require_debug_false"],
             },
+            'djdt_log': {
+                'level': 'DEBUG',
+                'class': 'debug_toolbar.panels.logging.ThreadTrackingHandler',
+                'collector': collector,
+            },
         },
         "loggers": {
             "django.request": {
@@ -78,10 +86,13 @@ class Dev(Configuration):
             },
         },
         "root": {
-            "handlers": ["console"],
+            "handlers": ["console", "djdt_log"],
             "level": "DEBUG",
         },
     }
+    # Django Debug Toolbar
+    INTERNAL_IPS = ["192.168.10.93"]
+
     # Application definition
 
     INSTALLED_APPS = [
@@ -94,9 +105,11 @@ class Dev(Configuration):
         'blog',
         'crispy_forms',
         'crispy_bootstrap5',
+        'debug_toolbar',
     ]
 
     MIDDLEWARE = [
+      "debug_toolbar.middleware.DebugToolbarMiddleware",
         'django.middleware.security.SecurityMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.common.CommonMiddleware',

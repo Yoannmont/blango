@@ -3,15 +3,20 @@ from django.utils import timezone
 from blog.models import Post
 from django.shortcuts import redirect
 from blog.forms import CommentForm
+from django.http import HttpResponse
 import logging
 
 logger = logging.getLogger(__name__)
 
 # Create your views here.
 
+def get_ip(request):
+  msg = 'IP is %s'
+  logger.debug(msg, request.META['REMOTE_ADDR'])
+  return HttpResponse('IP is %s' % request.META['REMOTE_ADDR'])
 
 def index(request):
-    posts = Post.objects.filter(published_at__lte=timezone.now())
+    posts = Post.objects.filter(published_at__lte=timezone.now()).select_related("author")
     logger.debug("Got %d posts", len(posts))
     return render(request, "blog/index.html", {"posts": posts})
 
