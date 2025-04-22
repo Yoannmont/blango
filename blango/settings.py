@@ -131,6 +131,7 @@ class Dev(Configuration):
         'allauth.socialaccount.providers.google',
         'rest_framework',
         'rest_framework.authtoken',
+        'drf_yasg'
     ]
 
     MIDDLEWARE = [
@@ -170,6 +171,13 @@ class Dev(Configuration):
     ]
 
     WSGI_APPLICATION = 'blango.wsgi.application'
+
+    SWAGGER_SETTINGS = {
+        "SECURITY_DEFINITIONS": {
+            "Token": {"type": "apiKey", "name": "Authorization", "in": "header"},
+            "Basic": {"type": "basic"},
+        }
+    }
 
 
     # Database
