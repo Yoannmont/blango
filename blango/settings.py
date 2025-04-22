@@ -15,6 +15,7 @@ from configurations import values, Configuration
 import dj_database_url
 from debug_toolbar.panels.logging import collector
 
+
 class Dev(Configuration):
 
     # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -100,6 +101,14 @@ class Dev(Configuration):
 
     # Application definition
 
+    REST_FRAMEWORK = {
+        "DEFAULT_AUTHENTICATION_CLASSES": [
+            "rest_framework.authentication.BasicAuthentication",
+            "rest_framework.authentication.SessionAuthentication",
+            "rest_framework.authentication.TokenAuthentication",
+        ]
+    }
+
     INSTALLED_APPS = [
         'django.contrib.admin',
         'django.contrib.auth',
@@ -118,6 +127,7 @@ class Dev(Configuration):
         'allauth.socialaccount',
         'allauth.socialaccount.providers.google',
         'rest_framework',
+        'rest_framework.authtoken',
     ]
 
     MIDDLEWARE = [
