@@ -18,11 +18,9 @@ schema_view = get_schema_view(
 )
 
 
-tag_router = DefaultRouter()
-tag_router.register("tags", TagViewSet)
-
-post_router = DefaultRouter()
-post_router.register("posts", PostViewSet)
+router = DefaultRouter()
+router.register("tags", TagViewSet)
+router.register("posts", PostViewSet)
 
 urlpatterns = [
     path("users/<str:email>/", UserDetail.as_view(), name="api_user_detail"),
@@ -41,6 +39,5 @@ urlpatterns += [
         schema_view.with_ui("swagger", cache_timeout=0),
         name="schema-swagger-ui",
     ),
-    path('', include(tag_router.urls)),
-    path('', include(post_router.urls)),
+    path('', include(router.urls)),
 ]
