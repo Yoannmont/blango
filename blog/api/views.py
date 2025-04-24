@@ -4,6 +4,7 @@ from datetime import timedelta
 
 from blog.api.filters import PostFilterSet
 from django.utils import timezone
+from django.db.models import Q
 from django.http import Http404
 from blog.api.serializers import PostSerializer, UserSerializer, PostDetailSerializer, TagSerializer
 from blog.models import Post, Tag
