@@ -19,11 +19,13 @@ from django.views.decorators.vary import vary_on_headers
 
 from rest_framework.exceptions import PermissionDenied
 
+
+#Not used
 class PostList(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
-
+#Not used
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [AuthorModifyOrReadOnly | IsAdminUserForObject]
     queryset = Post.objects.all()

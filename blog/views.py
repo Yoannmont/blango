@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from blog.forms import CommentForm
 from django.http import HttpResponse
 import logging
+from django.urls import reverse
 
 logger = logging.getLogger(__name__)
 
@@ -46,4 +47,4 @@ def post_detail(request, slug):
 
 
 def post_table(request):
-    return render(request, "blog/post-table.html")
+    return render(request, "blog/post-table.html", {"post_list_url": reverse("blog:post-list")})
